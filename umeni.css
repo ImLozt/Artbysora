@@ -17,7 +17,7 @@ h1 {
 
 h2 {
   font-family: 'Bebas Neue', sans-serif;
-  text-shadow: 7px 0p 10px #3c3fff;
+  text-shadow: 7px 0px 10px #3c3fff;
 }
 
 body {
@@ -35,10 +35,18 @@ body {
   }
 }
 
+/* všeobecně, aby se img nechovalo jako inline */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 .container {
-  width: min(60vw, 1800px);
+  width: min(95vw, 1300px);
   margin: 0 auto;
-  background: linear-gradient(135deg,
+  background: linear-gradient(
+    135deg,
     #1730b9,
     #0f0850,
     #05071a,
@@ -86,6 +94,7 @@ body {
 }
 
 /* Navigace */
+
 nav {
   display: flex;
   justify-content: center;
@@ -145,6 +154,7 @@ nav a:hover::before {
   nav:hover a {
     flex: 0.8;
   }
+
   nav a:hover {
     flex: 2;
     background: rgba(0, 224, 255, 0.1);
@@ -158,6 +168,7 @@ nav a:hover::before {
     gap: 10px;
     padding: 5px 5px 15px;
   }
+
   nav a {
     padding: 6px 4px;
     font-size: 1rem;
@@ -193,18 +204,20 @@ nav a:hover::before {
   .section p {
     font-size: 1em;
   }
+
   .section h2 {
     font-size: 4em;
   }
 }
 
 /* Karty */
+
 .card {
   background: linear-gradient(to right, #4b074bc2, #0a034ea2);
   margin: 0 auto;
   border-radius: 15px;
   transition: transform 0.3s ease;
-  max-width: 400px;
+  max-width: 450px;
   flex: 1 1 300px;
   overflow: hidden;
   position: relative;
@@ -245,16 +258,17 @@ nav a:hover::before {
 }
 
 @media (hover: hover) and (pointer: fine) {
-.card:hover {
-  transform: scale(1.05);
-  z-index: 2;
-  box-shadow: 0 0 20px rgba(9, 206, 255, 0.842);
+  .card:hover {
+    transform: scale(1.05);
+    z-index: 2;
+    box-shadow: 0 0 20px rgba(9, 206, 255, 0.842);
+  }
+
+  .card:hover::before {
+    opacity: 0;
+  }
 }
-.card:hover::before {
-  opacity: 0;
-}
-}
-  
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -310,7 +324,8 @@ nav a:hover::before {
   }
 }
 
-/* Fullscreen */
+/* Fullscreen overlay */
+
 .fullscreen-overlay {
   position: fixed;
   inset: 0;
@@ -327,7 +342,9 @@ nav a:hover::before {
 }
 
 @keyframes fadeOverlay {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 
 .fullscreen-overlay img,
@@ -364,6 +381,8 @@ nav a:hover::before {
   cursor: pointer;
 }
 
+/* Tlačítko v headeru */
+
 #tlacitko-header {
   display: flex;
   align-items: center;
@@ -397,6 +416,7 @@ nav a:hover::before {
 }
 
 /* Paticka */
+
 footer {
   background: linear-gradient(135deg, #0b096e, #040333);
   padding: 30px 15px;
@@ -477,49 +497,35 @@ footer p {
   footer {
     padding: 15px 10px;
   }
+
   footer h2.footer-title {
     font-size: 1.5em;
   }
+
   footer p {
     font-size: 1em;
   }
+
   .social-links {
     gap: 8px;
     max-width: 100%;
   }
+
   .social-box {
     width: 20vw;
     min-width: 40px;
     max-width: 60px;
   }
+
   .social-box .front img {
     max-width: 50%;
     max-height: 50%;
   }
+
   .social-box .back {
     font-size: 0.5rem;
   }
 }
 
-
-/* Zvýraznění prvku před načtením (nebo decentní tmavý odstín) */
-.lazy {
-  opacity: 0;                /* obrázek je na začátku neviditelný */
-  transition: opacity 0.4s ease-out;
-  /* Pokud chceš, můžeš dodat nějaké pozadí, aby neblikalo čistě bílo:
-  background-color: rgba(0, 0, 0, 0.2);
-  */
-}
-
-/* Jakmile je obrázek načtený, přidáme třídu 'loaded', aby se plynule objevil */
-.lazy.loaded {
-  opacity: 1;
-}
-
-
-
-
-
-
-
-
+/* POZOR: původní .lazy byla odstraněna – už neděláme opacity: 0,
+   aby nevznikaly prázdné fleky při načítání */
