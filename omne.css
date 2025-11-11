@@ -20,7 +20,8 @@ body {
   color: white;
   line-height: 1.6;
   background-image: url('obrazky/pozadiwebu2.webp');
-  background-size: cover;
+  background-size: contain;
+  background-color: #050816;
 }
 
 @media (max-width: 768px) {
@@ -355,4 +356,5 @@ footer p {
     font-size: 0.5rem;
   }
 }
+
 
