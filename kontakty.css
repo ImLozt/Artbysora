@@ -1,3 +1,8 @@
+html {
+  scroll-behavior: smooth;
+  background-color: #050816;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -511,5 +516,6 @@ footer h2.footer-title {
   padding: 0 8px;
 }
 }
+
 
 
