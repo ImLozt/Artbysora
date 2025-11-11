@@ -22,7 +22,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   color: white;
   line-height: 1.6;
-
+  background-color: gray;
   background-size: contain;
 }
 
@@ -769,4 +769,5 @@ footer p {
     display: none;
   }
 }
+
 
