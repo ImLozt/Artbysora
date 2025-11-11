@@ -23,7 +23,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   color: white;
   line-height: 1.6;
-  background-image: url('obrazky/pozadiwebu2.wp2');
+  background-image: url('obrazky/pozadiwebu2.webp');
   background-size: contain;
   background-color: #050816;
 }
@@ -771,6 +771,7 @@ footer p {
     display: none;
   }
 }
+
 
 
 
