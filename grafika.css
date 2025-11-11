@@ -34,8 +34,7 @@ body {
 }
 
 .container {
-  max-width: 1300px;
-  width: 100%;
+  width: min(60vw, 1800px);
   margin: 0 auto;
   background: linear-gradient(135deg,
     #1730b9,
@@ -203,7 +202,7 @@ nav a:hover::before {
   margin: 0 auto;
   border-radius: 15px;
   transition: transform 0.3s ease;
-  max-width: 350px;
+  max-width: 450px;
   flex: 1 1 300px;
   overflow: hidden;
   position: relative;
