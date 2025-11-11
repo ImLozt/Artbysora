@@ -1,5 +1,6 @@
 html {
   scroll-behavior: smooth;
+  background-color: #050816;
 }
 
 * {
@@ -24,6 +25,7 @@ body {
   line-height: 1.6;
   background-image: url('obrazky/pozadiwebu2.wp2');
   background-size: contain;
+  background-color: #050816;
 }
 
 @media (max-width: 768px) {
@@ -769,6 +771,7 @@ footer p {
     display: none;
   }
 }
+
 
 
 
