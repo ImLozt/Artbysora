@@ -35,8 +35,7 @@ body {
 }
 
 .container {
-  max-width: 1600px;
-  width: 100%;
+  width: min(60vw, 1800px);
   margin: 0 auto;
   background-color: #23282c;
   background-size: cover;
@@ -255,7 +254,7 @@ nav a:hover::before {
   margin: 0 auto;
   border-radius: 15px;
   transition: transform 0.3s ease;
-  max-width: 350px;
+  max-width: 400px;
   flex: 1 1 300px;
   overflow: hidden;
   position: relative;
@@ -771,6 +770,7 @@ footer p {
     display: none;
   }
 }
+
 
 
 
