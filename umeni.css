@@ -43,7 +43,7 @@ img {
 }
 
 .container {
-  width: min(95vw, 1300px);
+  width: min(60vw, 1800px);
   margin: 0 auto;
   background: linear-gradient(
     135deg,
@@ -529,3 +529,4 @@ footer p {
 
 /* POZOR: původní .lazy byla odstraněna – už neděláme opacity: 0,
    aby nevznikaly prázdné fleky při načítání */
+
