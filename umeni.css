@@ -1,3 +1,8 @@
+html {
+  scroll-behavior: smooth;
+  background-color: #050816;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -510,5 +515,6 @@ footer p {
 .lazy.loaded {
   opacity: 1;
 }
+
 
 
