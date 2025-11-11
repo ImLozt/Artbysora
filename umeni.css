@@ -22,7 +22,6 @@ h2 {
 
 body {
   font-family: 'Montserrat', sans-serif;
-  color: white;
   line-height: 1.6;
   background-image: url('obrazky/pozadiwebu2.webp');
   background-size: contain;
@@ -515,6 +514,7 @@ footer p {
 .lazy.loaded {
   opacity: 1;
 }
+
 
 
 
