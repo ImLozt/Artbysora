@@ -30,8 +30,7 @@ body {
 }
 
 .container {
-  max-width: 1300px;
-  width: 100%;
+  width: min(60vw, 1800px);
   margin: 0 auto;
   background: linear-gradient(135deg,
     #1730b9,
@@ -356,3 +355,4 @@ footer p {
     font-size: 0.5rem;
   }
 }
+
