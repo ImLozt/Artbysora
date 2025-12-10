@@ -92,7 +92,9 @@ nav{
   gap:10px;
   overflow:hidden;
   padding:5px 5px 50px;
-  margin-top:30rem;
+
+  /* Rozestup pod hero – škáluje, ale má rozumný strop */
+  margin-top: clamp(10rem, 12vh, 30rem);
 }
 nav a{
   position:relative;
@@ -166,7 +168,10 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
 
 /* ============ HERO (posun zachován) ============ */
 #uvitani{
-  min-height: calc(100vh - var(--header-h));
+  /* přesná výška obrazovky + 10px, ať nic „neprosvítá“ */
+  height: calc(100svh + 10px);
+  min-height: calc(100dvh + 10px);
+
   display:flex;
   flex-direction:column;
   justify-content:space-between;
@@ -174,14 +179,13 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
   position:relative;
   overflow:hidden;
   z-index:1;
-  margin-top:-110px;   /* necháváme dle tvého přání */
+  margin-top:-110px;   /* ponecháno dle tvého přání */
   color:white;
 }
-/* Desktop: hero = přesně výška obrazovky */
-@media (min-width: 1024px){
-  #uvitani{ min-height: 100dvh; }
-}
 
+/* už nepodtlačujeme FHD na 92svh – chceme plné pokrytí se „+10px“ */
+
+/* Pozadí hero */
 .uvitani-bg{
   position:absolute;
   inset:0;
@@ -216,14 +220,12 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
   .section h2{ margin:12px 8px; }
 }
 
-/* ============ „Vítej ve světě…“ – větší na desktopu ============ */
+/* ============ „Vítej ve světě…“ – zmenšený strop, aby se vešel i na 4K ============ */
 #zacatek{
-  font-size: clamp(3rem, 6.5vw, 4rem);
-  margin-top: 10vh;
+  /* menší cap: na 4K se vejde do .container i s nowrap typewriterem */
+  font-size: clamp(2.8rem, 4.2vw, 6.5rem);
+  margin-top: 12vh;
   line-height: 1.05;
-}
-@media (min-width: 1024px){
-  #zacatek{ font-size: clamp(9rem, 7.5vw, 6rem); }
 }
 
 /* Typewriter efekt */
@@ -302,7 +304,7 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
 
 /* Mobil/tablet: bez zoomu, jen krátký stín při dotyku */
 @media (hover:none){
-  .card:hover{ transform:none; }       /* pro jistotu */
+  .card:hover{ transform:none; }
   .card:active{ box-shadow:0 0 16px rgba(0,224,255,.55); }
 }
 
@@ -323,12 +325,12 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
   border-top-left-radius:10px;
   border-top-right-radius:10px;
 }
-/* Mobil – přes celou šířku, přirozená výška */
+/* Mobil – 1 sloupec, přirozená výška */
 @media (max-width: 768px){
   .gallery{
     grid-template-columns:1fr;
-    gap:34px;
-    margin:52px;
+    gap:14px;
+    margin:12px;
     padding:0;
   }
   .card{ max-width:none; width:100%; }
@@ -445,7 +447,7 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
   display:block;
   margin:5vw auto 3vw auto;
   max-width:500px;
-  /* žádné odlišné font-size – přebírá var(--fs-btn) jako .tlacitko */
+  /* dědí font-size z .tlacitko (var(--fs-btn)) */
 }
 
 /* Header tlačítko */
