@@ -8,17 +8,29 @@ html {
 /* ========= FLUIDNÍ TYPOGRAFIE (sjednocené měřítko) ========= */
 :root{
   --fs-body: clamp(15px, 0.9vw + 0.6rem, 18px);
-  --fs-h2: clamp(2.2rem, 6vw, 5rem);
-  --fs-nav: clamp(1.5rem, 3.6vw, 2.4rem);
+  --fs-h2: clamp(2.2rem, 6vw, 5rem);  /* pro běžné h2 v sekcích */
+  --fs-hero: clamp(2.4rem, 15.5vw, 5.6rem); /* výchozí – mobily/tablety */
+  --fs-nav: clamp(2.4rem, 3.6vw, 2.4rem);
   --fs-btn: clamp(1rem, 1.2vw + .5rem, 1.1rem);
+  --top-fade-height: clamp(140px, 18vh, 320px);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
+/* ≥768px – může povyrůst */
+@media (min-width: 768px){
+  :root{ --fs-hero: clamp(3.2rem, 6.2vw, 4.8rem); }
 }
+
+/* ≥1200px (typické FHD) – udělej ho VELKÝ */
+@media (min-width: 1200px){
+  :root{ --fs-hero: clamp(4.2rem, 8.2vw, 6.5rem); }
+}
+
+/* ≥1600px (2K/4K) – ještě o chlup, ale se stropem */
+@media (min-width: 1600px){
+  :root{ --fs-hero: clamp(4.8rem, 4.4vw, 7.8rem); }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; text-decoration: none; }
 
 h1 { font-family: 'Great Vibes', cursive; }
 
@@ -59,105 +71,76 @@ body {
 
 /* ============ HLAVIČKA ============ */
 #hero-header{
-  background: linear-gradient(to bottom, #19258f85, #c82bf800);
+  background: linear-gradient(to bottom, #7c89ff10, #7c89ff46);
   color: #131628;
-  padding: 20px 0;
-  transition: transform 0.3s ease;
+  padding: 18px 0;
+  transition: transform .3s ease;
   display: flex;
   position: sticky;
   top: 0;
   z-index: 999;
   justify-content: space-between;
+  border-bottom: 1px solid #ffffff; /* tenká linka dole */
 }
-.header-content{
-  padding: 0 40px;
-  display: flex;
-  transition: all 0.6s ease;
-}
+.header-content{ padding: 0 40px; display: flex; transition: all .6s ease; }
 #hero-header.hidden{ transform: translateY(-100%); }
 
-/* Logo */
-.logo-link{
-  color:#fff;
-  transition: all .3s ease;
-  padding:3px;
-  display:inline-block;
-}
+.logo-link{ color:#fff; transition: all .3s ease; padding:3px; display:inline-block; }
 .logo-link:hover{ opacity:.7; }
 
-/* ============ NAVIGACE ============ */
+/* ============ NAVIGACE – TEXT-ONLY ============ */
 nav{
   display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  overflow:hidden;
-  padding:5px 5px 50px;
-
-  /* Rozestup pod hero – škáluje, ale má rozumný strop */
-  margin-top: clamp(10rem, 12vh, 30rem);
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:nowrap;
+  gap:0;
+  padding: 4px 0 10px;
+  margin-top: 120px;
 }
 nav a{
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex:1 1 auto;
+  flex:1 1 0;
+  min-width:0;
   text-align:center;
-  padding:14px 0;
-  background:linear-gradient(to right,#4447fdd5,#318affa2,#3634dbb9);
+  padding: 10px 0;
   color:#fff;
-  font-size:var(--fs-nav);
-  transition:all .3s ease;
   font-family:'Bebas Neue',sans-serif;
-  border:none;
-  border-radius:20px;
-  box-shadow:0 2px 12px #250344;
-  min-width:160px;
+  font-weight:600;
+  letter-spacing:.02em;
+  font-size: var(--fs-nav);
+  line-height:1.1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  background:none !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  position:relative;
+  transition: flex .25s ease, color .2s ease, letter-spacing .2s ease, text-shadow .2s ease;
 }
-nav a::before{
-  content:'';
-  position:absolute;
-  top:-120%; left:-80%;
-  width:180%; height:500%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);
-  transform:translateX(-100%) rotate(20deg);
-  transition:transform .5s ease;
-  pointer-events:none;
-}
-nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
+nav a::before{ display:none !important; }
+nav a + a{ border-left: 1px solid #ffffff; }
 
-@media (min-width: 768px){
-  nav:hover a{ flex: .8; }
+@media (hover:hover) and (pointer:fine){
+  nav:hover a{ flex: .9; }
   nav a:hover{
-    flex:2;
-    background:rgba(0,224,255,.1);
-    color:#00e0ff;
-    box-shadow:0 0 0 #490652;
+    flex: 1.8;
+    color:#9bd6ff;
+    text-shadow: 0 0 12px rgba(155,214,255,.35);
+    letter-spacing:.03em;
+    font-size: calc(var(--fs-nav) * 1.06);
   }
-  nav a{ padding:3vw 0; }
-  nav{ padding:20px 20px; gap:50px; }
+  nav a:hover::after{
+    content:"";
+    position:absolute; left:12%; right:12%; bottom:2px; height:2px;
+    background:#9bd6ff; border-radius:2px;
+  }
 }
 
-/* Mobil – dlaždice */
 @media (max-width: 768px){
-  nav{
-    margin-top:16px;
-    padding:250px 0 20px;
-    gap:20px;
-  }
-  nav a{
-    flex:1 1 calc(50% - 10px);
-    min-height: 15vw;
-    padding:0;
-    line-height:1;
-  }
-}
-@media (max-width: 420px){
-  nav a{
-    flex:1 1 100%;
-    min-height: 48vw;
-  }
+  :root{ --fs-nav: clamp(0.95rem, 4.6vw, 1.35rem); }
+  nav{ padding: 4px 0; }
+  nav a{ padding: 8px 0; }
 }
 
 /* ============ SEKCE ============ */
@@ -166,12 +149,10 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
 #kresby{ background: linear-gradient(to bottom,#0f0850,#05071a); }
 #videa { background: linear-gradient(to bottom,#05071a,#350833); }
 
-/* ============ HERO (posun zachován) ============ */
+/* ============ HERO (posun + fade) ============ */
 #uvitani{
-  /* přesná výška obrazovky + 10px, ať nic „neprosvítá“ */
   height: calc(100svh + 10px);
   min-height: calc(100dvh + 10px);
-
   display:flex;
   flex-direction:column;
   justify-content:space-between;
@@ -179,56 +160,67 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
   position:relative;
   overflow:hidden;
   z-index:1;
-  margin-top:-110px;   /* ponecháno dle tvého přání */
+  margin-top:-110px;   /* nechávám dle tvého přání */
   color:white;
+
+  /* víc místa u spodku, škáluje i pro FHD */
+  padding-bottom: clamp(28px, 8vh, 160px);
+}
+/* extra jemné doladění pro typické FHD výšky */
+@media (min-width: 1200px) and (max-height: 1100px){
+  #uvitani{ padding-bottom: clamp(40px, 10vh, 180px); }
 }
 
-/* už nepodtlačujeme FHD na 92svh – chceme plné pokrytí se „+10px“ */
-
-/* Pozadí hero */
 .uvitani-bg{
-  position:absolute;
-  inset:0;
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  opacity:0;
-  transition:opacity 2s ease-in-out;
-  z-index:-2;
+  position:absolute; inset:0;
+  background-size:cover; background-position:center; background-repeat:no-repeat;
+  opacity:0; transition:opacity 2s ease-in-out; z-index:-2;
 }
 .uvitani-bg.active{ opacity:1; }
+
+/* spodní barevný závoj (už byl) */
 #uvitani::before{
-  content:"";
-  position:absolute;
-  inset:0;
+  content:""; position:absolute; inset:0;
   background:linear-gradient(to bottom,#0f085000,#3a17b988);
   z-index:-1;
 }
 
+/* horní tmavý fade pod header+nav */
+#uvitani::after{
+  content:"";
+  position:absolute; left:0; right:0; top:0;
+  height: var(--top-fade-height);
+  pointer-events:none;
+  background: linear-gradient(
+    to bottom,
+    #060224f2 0%,
+    #0b0c3d8c 65%,
+    #00000000 100%
+  );
+  z-index: -1;
+}
+@media (max-width: 768px){
+  :root{ --top-fade-height: clamp(120px, 22vh, 240px); }
+}
+
 /* Nadpisy a texty v sekcích */
-.section h2{
-  margin:20px;
-  text-align:left;
-}
-.section p{
-  margin:10px;
-  padding:10px 0;
-  font-size: clamp(1rem, 1.2vw + .5rem, 1.5rem);
-}
+.section h2{ margin:20px; text-align:left; }
+.section p{ margin:10px; padding:10px 0; font-size: clamp(1rem, 1.2vw + .5rem, 1.5rem); }
 @media (max-width: 768px){
   .section{ padding:24px 16px; }
   .section h2{ margin:12px 8px; }
 }
 
-/* ============ „Vítej ve světě…“ – zmenšený strop, aby se vešel i na 4K ============ */
+/* ============ HLAVNÍ NADPIS „u tlačítka“ ============ */
+/* HLAVNÍ NADPIS „u tlačítka“ */
 #zacatek{
-  /* menší cap: na 4K se vejde do .container i s nowrap typewriterem */
-  font-size: clamp(2.8rem, 4.2vw, 6.5rem);
-  margin-top: 12vh;
-  line-height: 1.05;
+  font-size: var(--fs-hero);   /* ← tady */
+  margin-top: auto;            /* drž ho dole v hero sekci */
+  margin-bottom: clamp(10px, 3vh, 64px); /* mezera nad tlačítkem – FHD i výš */
 }
 
-/* Typewriter efekt */
+
+/* ============ Typewriter ============ */
 .typewriter{
   display:inline-block;
   padding-left:3px;
@@ -240,10 +232,8 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
 }
 .typewriter::after{
   content:"";
-  position:absolute;
-  right:0; top:0;
-  width:10px; height:100%;
-  background-color:#fff;
+  position:absolute; right:0; top:0;
+  width:10px; height:100%; background-color:#fff;
   animation: blink-caret .75s step-end 5 3.5s, fade-out .5s ease forwards;
   animation-delay:3.5s, 7.25s;
 }
@@ -267,159 +257,126 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
   transition:transform .3s ease, box-shadow .2s ease;
   max-width:400px;
   flex:1 1 300px;
-  overflow:hidden;
-  position:relative;
-  cursor:pointer;
+  overflow:hidden; position:relative; cursor:pointer;
   box-shadow:0 0 20px #0f0000ab;
 }
 .card::before{
-  content:"";
-  position:absolute;
-  inset:0;
+  content:""; position:absolute; inset:0;
   background:linear-gradient(135deg, rgba(56,91,245,.404) 0%, rgba(255,255,255,.045) 35%, rgba(255,53,97,.123) 60%);
-  mix-blend-mode:screen;
-  pointer-events:none;
-  transition:opacity .3s ease;
+  mix-blend-mode:screen; pointer-events:none; transition:opacity .3s ease;
 }
 .card p{
-  margin:0 10px 6px;
-  padding:8px;
+  margin:0 10px 6px; padding:8px;
   font-size: clamp(1rem, 1.1vw + .6rem, 1.5rem);
-  position:relative;
-  padding-right:1.2em;
+  position:relative; padding-right:1.2em;
 }
 .card p::after{
-  content:"»";
-  position:absolute;
-  right:10px; top:40%;
-  transform:translateY(-50%);
-  font-size:2em;
+  content:"»"; position:absolute; right:10px; top:40%;
+  transform:translateY(-50%); font-size:2em;
 }
 
-/* Desktop: hover efekt zachován */
 @media (hover:hover) and (pointer:fine){
   .card:hover{ transform:scale(1.05); z-index:2; box-shadow:0 0 20px rgba(9,206,255,.842); }
   .card:hover::before{ opacity:0; }
 }
-
-/* Mobil/tablet: bez zoomu, jen krátký stín při dotyku */
 @media (hover:none){
   .card:hover{ transform:none; }
   .card:active{ box-shadow:0 0 16px rgba(0,224,255,.55); }
 }
 
-/* ============ GALERIE ============ */
+/* ===== GALERIE (sjednoceno s umeni.css) ===== */
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:40px;
   margin:20px;
-  justify-items:center;
+  justify-items:stretch;
+  align-items:start;
   padding:0 20px;
 }
+
+/* zruší omezení karty z globálního .card na homepage */
+.gallery .card{
+  width:100%;
+  max-width:none;
+  margin:0;
+}
+
+/* obrázek uvnitř karty */
 .gallery img{
   width:100%;
-  height:500px;
+  height:100%;
   object-fit:cover;
-  transition:transform .3s ease, object-fit .3s ease;
+  object-position:center;
+  display:block;
   border-top-left-radius:10px;
   border-top-right-radius:10px;
 }
-/* Mobil – 1 sloupec, přirozená výška */
-@media (max-width: 768px){
+
+/* Desktop: přesně stejné hodnoty */
+@media (min-width:1024px){
   .gallery{
-    grid-template-columns:1fr;
-    gap:14px;
-    margin:12px;
-    padding:0;
+    grid-template-columns:repeat(3,1fr);
+    gap:36px;
   }
-  .card{ max-width:none; width:100%; }
-  .gallery img{ width:100%; height:auto; }
+  .gallery img{
+    height:480px;
+  }
+}
+
+/* Mobil: 1 sloupec + pevná výška, stejné jako na „umeni“ */
+@media (max-width:768px){
+  .gallery{ grid-template-columns:1fr; }
+  .gallery img{ width:100%; height:300px; object-fit:cover; }
 }
 
 /* ============ FULLSCREEN OVERLAY ============ */
 .fullscreen-overlay{
-  position:fixed;
-  inset:0;
-  background-color:rgba(0,0,0,.9);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  padding:20px;
-  box-sizing:border-box;
-  z-index:9999;
-  opacity:0;
-  animation:fadeOverlay .3s ease-out forwards;
+  position:fixed; inset:0; background-color:rgba(0,0,0,.9);
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+  padding:20px; box-sizing:border-box; z-index:9999;
+  opacity:0; animation:fadeOverlay .3s ease-out forwards;
 }
 @keyframes fadeOverlay{ to{opacity:1;} }
 .fullscreen-overlay img,
 .fullscreen-overlay video{
-  max-width:90vw;
-  max-height:80vh;
-  object-fit:contain;
-  border-radius:12px;
-  transform:scale(.8);
-  animation:zoomImage .4s ease-out forwards;
+  max-width:90vw; max-height:80vh; object-fit:contain; border-radius:12px;
+  transform:scale(.8); animation:zoomImage .4s ease-out forwards;
 }
 @keyframes zoomImage{ to{opacity:1; transform:scale(1);} }
 .fullscreen-overlay p{
-  color:#fff;
-  margin-top:20px;
-  font-size: clamp(1rem, 1vw + .6rem, 1.2rem);
-  text-align:center;
+  color:#fff; margin-top:20px;
+  font-size: clamp(1rem, 1vw + .6rem, 1.2rem); text-align:center;
 }
 .fullscreen-overlay::after{
-  content:'✖';
-  position:absolute;
-  top:20px; right:30px;
+  content:'✖'; position:absolute; top:20px; right:30px;
   font-size:2rem; color:#fff; cursor:pointer;
 }
 
 /* ============ VIDEO GRID ============ */
 .video{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:30px;
-  justify-items:center;
-  padding:0 20px;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px; justify-items:center; padding:0 20px;
 }
 .video .card{
   background:linear-gradient(to right,#4b074bc2,#0a034ea2);
   transition:transform .3s, box-shadow .2s ease;
-  width:100%;
-  max-width:450px;
-  position:relative;
-  overflow:hidden;
-  text-align:left;
-  border-top-left-radius:10px;
-  border-top-right-radius:10px;
-  cursor:pointer;
-  margin:20px;
+  width:100%; max-width:450px; position:relative; overflow:hidden;
+  text-align:left; border-top-left-radius:10px; border-top-right-radius:10px;
+  cursor:pointer; margin:20px;
 }
-.video .card p{
-  margin:6px 10px;
-  padding:8px;
-  font-size: clamp(1rem, 1.1vw + .6rem, 1.5rem);
-}
-/* Desktop hover pro videa */
+.video .card p{ margin:6px 10px; padding:8px; font-size: clamp(1rem, 1.1vw + .6rem, 1.5rem); }
 @media (hover:hover) and (pointer:fine){
   .video .card:hover{ transform:scale(1.05); box-shadow:0 0 15px rgba(0,224,255,.5); }
 }
-/* Mobil: jen active stín */
 @media (hover:none){
   .video .card:hover{ transform:none; }
   .video .card:active{ box-shadow:0 0 15px rgba(0,224,255,.5); }
 }
 .preview-video{ width:100%; height:auto; object-fit:cover; display:block; pointer-events:none; }
 
-/* Video – mobil jednodušší */
 @media (max-width: 768px){
-  .video{
-    grid-template-columns:1fr;
-    gap:15px;
-    padding:0 10px;
-  }
+  .video{ grid-template-columns:1fr; gap:15px; padding:0 10px; }
   .video .card{ max-width:100%; margin:10px 0; }
   .preview-video{ max-height:none; }
 }
@@ -434,38 +391,28 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
   font-weight:bold;
   color:#23282c;
   background:linear-gradient(135deg,#00e0ff,#42ccfe);
-  border:none;
-  border-radius:8px;
-  text-align:center;
+  border:none; border-radius:8px; text-align:center;
   transition:transform .2s ease, box-shadow .2s ease;
   box-shadow:0 4px 10px rgba(0,224,255,.3);
 }
 .tlacitko:hover{ transform:scale(1.05); box-shadow:0 0 15px rgba(0,224,255,.5); }
 
-/* „Pokračuj níže…“ — stejné jako ostatní tlačítka */
+/* „Pokračuj níže…“ — rezerva od spodku i na FHD */
 #tlacitko-uvitani{
   display:block;
   margin:5vw auto 3vw auto;
   max-width:500px;
-  /* dědí font-size z .tlacitko (var(--fs-btn)) */
+  margin-bottom: clamp(20px, 7vh, 110px);
 }
 
 /* Header tlačítko */
 #tlacitko-header{
-  display:flex;
-  align-items:center;
-  gap:8px;
+  display:flex; align-items:center; gap:8px;
   font-size:clamp(1rem, 1.1vw + .4rem, 1.1rem);
-  padding:10px;
-  margin-right:40px;
-  font-weight:bold;
-  color:#fff;
+  padding:10px; margin-right:40px; font-weight:bold; color:#fff;
   background:linear-gradient(to right,#4447fdd5,#318affa2,#3634dbb9);
-  border:none;
-  border-radius:8px;
-  text-align:center;
-  transition:all .3s ease;
-  box-shadow:0 4px 10px rgba(3,5,39,.3);
+  border:none; border-radius:8px; text-align:center;
+  transition:all .3s ease; box-shadow:0 4px 10px rgba(3,5,39,.3);
 }
 #tlacitko-header:hover{ transform:scale(1.05); box-shadow:0 0 15px rgba(108,111,255,.699); }
 #tlacitko-header img{ width:20px; height:20px; }
@@ -478,52 +425,36 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
 /* ============ FOOTER / SOCIALS ============ */
 footer{
   background:linear-gradient(135deg,#0b096e,#040333);
-  padding:30px 15px;
-  text-align:center;
+  padding:30px 15px; text-align:center;
 }
 footer h2.footer-title{
   font-size:clamp(1.6rem, 2.4vw, 2.2rem);
-  margin-bottom:10px;
-  text-shadow:none;
+  margin-bottom:10px; text-shadow:none;
 }
 footer p{
   font-size:clamp(1rem, 1.2vw + .4rem, 1.3rem);
   margin:0;
 }
 .social-links{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:15px;
-  margin:20px auto;
-  width:95%;
-  max-width:900px;
-  overflow:hidden;
+  display:flex; flex-wrap:wrap; justify-content:center; gap:15px;
+  margin:20px auto; width:95%; max-width:900px; overflow:hidden;
 }
 .social-box{
-  flex:1 1 70px;
-  max-width:80px;
-  min-width:50px;
-  aspect-ratio:1;
-  perspective:600px;
-  text-decoration:none;
+  flex:1 1 70px; max-width:80px; min-width:50px; aspect-ratio:1; perspective:600px; text-decoration:none;
 }
 .social-box .box-inner{
-  position:relative;
-  width:100%; height:100%;
-  transition:transform .6s;
-  transform-style:preserve-3d;
+  position:relative; width:100%; height:100%;
+  transition:transform .6s; transform-style:preserve-3d;
 }
 .social-box:hover .box-inner{ transform:rotateY(180deg); }
 .social-box .front, .social-box .back{
-  position:absolute; inset:0;
-  backface-visibility:hidden;
-  display:flex; align-items:center; justify-content:center;
-  border-radius:10px;
+  position:absolute; inset:0; backface-visibility:hidden;
+  display:flex; align-items:center; justify-content:center; border-radius:10px;
 }
 .social-box .front{ background:linear-gradient(135deg,#1e1d5e,#090799); }
 .social-box .front img{ max-width:60%; max-height:60%; }
 .social-box .back{ color:#fff; transform:rotateY(180deg); font-size:.7rem; }
+
 @media (max-width: 600px){
   footer{ padding:15px 10px; }
   footer h2.footer-title{ font-size:clamp(1.4rem,5vw,1.8rem); }
@@ -537,24 +468,13 @@ footer p{
 /* ============ KONTAKT ============ */
 .kontakt-section{
   background:linear-gradient(to bottom,#350833,#23043d);
-  color:white;
-  padding:60px 20px;
-  text-align:center;
+  color:white; padding:60px 20px; text-align:center;
 }
 .kontakt-section h2{ text-align:center; }
-.kontakt-form{
-  max-width:600px; margin:0 auto;
-  display:grid; gap:15px;
-}
-.kontakt-form label{
-  text-align:left;
-  font-size:clamp(1rem,1vw + .5rem,1.2rem);
-}
+.kontakt-form{ max-width:600px; margin:0 auto; display:grid; gap:15px; }
+.kontakt-form label{ text-align:left; font-size:clamp(1rem,1vw + .5rem,1.2rem); }
 .kontakt-form input, .kontakt-form textarea{
-  width:100%;
-  padding:12px;
-  border:none; border-radius:6px;
-  background:#23282c; color:white;
+  width:100%; padding:12px; border:none; border-radius:6px; background:#23282c; color:white;
 }
 .kontakt-form input:focus, .kontakt-form textarea:focus{ outline:2px solid #00e0ff; }
 .form-status{ opacity:0; transition:opacity .4s ease; margin-top:10px; text-align:center; }
