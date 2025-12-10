@@ -327,8 +327,8 @@ nav a:hover::before{ transform:translateX(100%) rotate(25deg); }
 @media (max-width: 768px){
   .gallery{
     grid-template-columns:1fr;
-    gap:14px;
-    margin:12px;
+    gap:34px;
+    margin:52px;
     padding:0;
   }
   .card{ max-width:none; width:100%; }
