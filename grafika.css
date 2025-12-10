@@ -5,28 +5,25 @@ html {
   overflow-x: hidden;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
+/* ========= FLUIDNÍ TYPOGRAFIE ========= */
+:root{
+  --fs-body: clamp(15px, 0.9vw + 0.6rem, 18px);
+  /* VĚTŠÍ NAV TEXT NA DESKTOPU */
+  --fs-nav: clamp(2.25rem, 1.8vw, 1.9rem);
+  --fs-btn: clamp(1rem, 1.2vw + .5rem, 1.1rem);
 }
 
-h1 {
-  font-family: 'Great Vibes', cursive;
-  text-decoration: none;
-}
 
-h2 {
+* { box-sizing: border-box; margin: 0; padding: 0; text-decoration: none; }
+
+h1{ font-family: 'Great Vibes', cursive; }
+h2{
   font-family: 'Bebas Neue', sans-serif;
   text-shadow: 7px 0px 10px #3c3fff;
 }
+h3{ margin-bottom: 10px; }
 
-h3 {
-  margin-bottom: 10px;
-}
-
-body {
+body{
   font-family: 'Montserrat', sans-serif;
   color: white;
   line-height: 1.6;
@@ -34,552 +31,301 @@ body {
   background-size: contain;
   background-color: #050816;
 }
+@media (max-width: 768px){ body{ background-image: none; } }
 
-@media (max-width: 768px) {
-  body {
-    background-image: none;
-  }
-}
+/* Obrázky obecně */
+img{ max-width: 100%; height: auto; display: block; }
 
-/* obrázky obecně */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-.container {
-  width: min(60vw, 1800px);
+/* ============ KONTEJNER ============ */
+.container{
+  width: min(96vw, 1550px);
   margin: 0 auto;
-  background: linear-gradient(
-    135deg,
-    #1730b9,
-    #0f0850,
-    #05071a,
-    #350833,
-    #23043d
-  );
+  background: linear-gradient(135deg,#1730b9,#0f0850,#05071a,#350833,#23043d);
   background-size: cover;
   background-position: center;
   box-shadow: 0 0 155px rgba(46, 60, 255, 0.74);
 }
-
-@media (max-width: 768px) {
-  .container {
-    width: 100vw;         /* na mobilu opravdu přes celou šířku */
-    box-shadow: none;     /* volitelné: bez obřího stínu na okrajích */
-  }
+@media (max-width: 768px){
+  .container{ width: 100vw; box-shadow: none; }
 }
 
-/* hlavicka */
-
-#hero-header {
-  background: linear-gradient(to bottom, #19258f85, #c82bf800);
+/* ============ HLAVIČKA ============ */
+#hero-header{
+  background: linear-gradient(to bottom, #7c89ff10, #7c89ff46);
   color: #131628;
-  padding: 25px 0;
-  transition: transform 0.3s ease;
+  padding: 18px 0;
+  transition: transform .3s ease;
   display: flex;
-  opacity: 1;
   position: sticky;
   top: 0;
   z-index: 999;
   justify-content: space-between;
+
+    /* NOVÉ: tenká bílá linka dole */
+  border-bottom: 1px solid rgb(255, 255, 255);
 }
+.header-content{ padding: 0 40px; display: flex; transition: all .6s ease; }
+#hero-header.hidden{ transform: translateY(-100%); }
 
-.header-content {
-  padding: 0 40px;
-  display: flex;
-  transition: all 0.6s ease;
+.logo-link{ color:#fff; transition: all .3s ease; padding:3px; display:inline-block; }
+.logo-link:hover{ opacity:.7; }
+
+/* ============ NAVIGACE – TEXT-ONLY (všude) ============ */
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:nowrap;          /* vždy v jedné řadě */
+  gap:0;
+  padding: 4px 0 10px;
+  margin-top: 0;
 }
+nav a{
+  flex:1 1 0;
+  min-width:0;
+  text-align:center;
+  padding: 10px 0;
+  color:#fff;
+  font-family:'Bebas Neue',sans-serif;
+  font-weight:600;
+  letter-spacing:.02em;
+  font-size: var(--fs-nav);
+  line-height:1.1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 
-#hero-header.hidden {
-  transform: translateY(-100%);
+  /* zrušení „bublin“ globálně */
+  background:none !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  position:relative;
+
+  /* plynulý „push“ efekt */
+  transition: flex .25s ease, color .2s ease, letter-spacing .2s ease, text-shadow .2s ease;
 }
+nav a::before{ display:none !important; }
 
-.logo-link {
-  color: #ffffff;
-  transition: all 0.3s ease;
-  padding: 3px;
-}
+/* svislé oddělovače mezi položkami */
+nav a + a{ border-left: 1px solid rgb(255, 255, 255); }
 
-.logo-link:hover {
-  opacity: 0.7;
-}
+/* DESKTOP: „push“ efekt + větší text na hover */
+@media (hover:hover) and (pointer:fine){
+  /* když je kurzor nad navigací, všechny odkazy se mírně stáhnou */
+  nav:hover a{ flex: .9; }
 
-/* Navigace */
-
-nav {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  overflow: hidden;
-  padding: 10px;
-  flex-wrap: nowrap;
-}
-
-nav a {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  text-align: center;
-  padding: 8px 10px;
-  font-size: 1.3rem;
-  background: linear-gradient(
-    to right,
-    #4447fdd5,
-    #318affa2,
-    #3634dbb9
-  );
-  color: rgb(255, 255, 255);
-  font-family: 'Bebas Neue', sans-serif;
-  border: none;
-  border-radius: 20px;
-  box-shadow: 0px 2px 12px #250344;
-  transition: all 0.3s ease;
-}
-
-nav a::before {
-  content: '';
-  position: absolute;
-  top: -110%;
-  left: -50%;
-  width: 180%;
-  height: 400%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.5),
-    transparent
-  );
-  transform: translateX(-100%) rotate(25deg);
-  transition: transform 0.5s ease;
-  pointer-events: none;
-}
-
-nav a:hover::before {
-  transform: translateX(100%) rotate(25deg);
-}
-
-@media (min-width: 768px) {
-  nav:hover a {
-    flex: 0.8;
+  /* zvýrazněný odkaz se roztáhne a opticky „odsunuje“ ostatní */
+  nav a:hover{
+    flex: 1.8;
+    color:#9bd6ff;
+    text-shadow: 0 0 12px rgba(155,214,255,.35);
+    letter-spacing:.03em;
+    font-size: calc(var(--fs-nav) * 1.06); /* lehce větší text na hover */
   }
-
-  nav a:hover {
-    flex: 2;
-    background: rgba(0, 224, 255, 0.1);
-    color: #00e0ff;
-    box-shadow: 0 0 0 #490652;
+  /* decentní spodní linka u hover položky */
+  nav a:hover::after{
+    content:"";
+    position:absolute; left:12%; right:12%; bottom:2px; height:2px;
+    background:#9bd6ff;
+    border-radius:2px;
   }
 }
 
-@media (max-width: 600px) {
-  nav {
-    gap: 10px;
-    padding: 5px 5px 15px;
-  }
-
-  nav a {
-    padding: 6px 4px;
-    font-size: 1rem;
-    border-radius: 12px;
-  }
+/* MOBILE – větší text, pořád jedna řada, bez push efektu */
+@media (max-width: 768px){
+  :root{ --fs-nav: clamp(0.95rem, 4.6vw, 1.35rem); }
+  nav{ padding: 4px 0; }
+  nav a{ padding: 8px 0; }
 }
 
-@media (min-width: 800px) {
-  nav a {
-    font-size: 1.8rem;
-  }
-}
-
-@media (max-width: 768px) {
-  nav {
-    margin-top: 16px;         /* místo 15vw použij pevnější hodnotu */
-    padding: 10px 10px 20px;  /* míň prostoru dole */
-    gap: 8px;
-  }
-}
-
-.section {
-  padding: 5px 20px;
-  padding-bottom: 10px;
-}
-
-.section h2 {
-  margin: 20px;
-  text-align: left;
-  font-size: 5em;
-  margin-bottom: 20px;
-}
-
-.section p {
-  margin: 10px;
-  padding: 10px;
-  font-size: 1.5em;
-}
-
-@media (max-width: 768px) {
-  .section p {
-    font-size: 1em;
-  }
-
-  .section h2 {
-    font-size: 4em;
-  }
-}
-
-/* Karty */
-
-.card {
-  background: linear-gradient(to right, #4b074bc2, #0a034ea2);
-  margin: 0 auto;
-  border-radius: 15px;
-  transition: transform 0.3s ease;
-  max-width: 450px;
-  flex: 1 1 300px;
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
-  box-shadow: 0 0 20px #0f0000ab;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(56, 91, 245, 0.404) 0%,
-    rgba(255, 255, 255, 0.045) 35%,
-    rgba(255, 53, 97, 0.123) 60%
-  );
-  mix-blend-mode: screen;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.card p {
-  margin: 0 10px 6px;
-  padding: 8px;
-  font-size: 1.5em;
-  position: relative;
-  padding-right: 1.2em;
-}
-
-.card p::after {
-  content: "»";
-  position: absolute;
-  right: 10px;
-  top: 40%;
-  transform: translateY(-50%);
-  font-size: 2em;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .card:hover {
-    transform: scale(1.05);
-    z-index: 2;
-    box-shadow: 0 0 20px rgba(9, 206, 255, 0.842);
-  }
-
-  .card:hover::before {
-    opacity: 0;
-  }
-}
-
-/* SKRYJE DUPLIKÁTY v galerii */
-.card.hidden {
-  display: none;
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
-  margin: 20px;
-  justify-items: center;
-  padding: 0 20px;
-}
-
-.gallery img {
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
-  transition: transform 0.3s ease, object-fit 0.3s ease;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
-@media (max-width: 768px) {
-  .gallery {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 0 10px;
-  }
-
-  .card {
-    max-width: 100%;
-  }
-
-  .gallery img {
-    width: 300px;
-    height: 300px;
-  }
-
-  .card p {
-    font-size: 1em;
-    padding: 6px;
-  }
-}
-
-@media (max-width: 480px) {
-  .gallery {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .gallery img {
-    height: 250px;
-  }
-
-  .card p {
-    font-size: 0.8em;
-  }
-}
-
-/* Fullscreen overlay + mini-thumbnaily */
-
-.fullscreen-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.9);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
-  z-index: 9999;
-  opacity: 0;
-  animation: fadeOverlay 0.3s ease-out forwards;
-}
-
-@keyframes fadeOverlay {
-  to {
-    opacity: 1;
-  }
-}
-
-#overlay-main-img {
-  max-width: 70vw;
-  max-height: 90vh;
-  object-fit: contain;
-  border-radius: 12px;
-}
-
-#overlay-thumbs {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-left: 15px;
-}
-
-#overlay-thumbs img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-  transform-origin: center center;
-}
-
-#overlay-thumbs img:hover {
-  transform: scale(1.1);
-  border-color: rgba(255, 255, 255, 0.8);
-}
-
-#overlay-close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-  z-index: 10001;
-}
-
-@media (max-width: 768px) {
-  .fullscreen-overlay {
-    flex-direction: column;
-    padding: 20px;
-  }
-
-  #overlay-main-img {
-    max-width: 100vw;
-    max-height: 50vh;
-  }
-
-  #overlay-thumbs {
-    flex-direction: row;
-    margin-left: 0;
-    margin-top: 15px;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  #overlay-thumbs img {
-    width: 60px;
-    height: 60px;
-  }
-}
-
-/* Tlačítko v headeru */
-
-#tlacitko-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1.1rem;
-  padding: 10px;
-  margin-right: 40px;
-  font-weight: bold;
-  color: #ffffff;
-  background: linear-gradient(
-    to right,
-    #4447fdd5,
-    #318affa2,
-    #3634dbb9
-  );
-  border: none;
-  border-radius: 8px;
-  text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(3, 5, 39, 0.3);
-}
-
-#tlacitko-header:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(108, 111, 255, 0.699);
-}
-
-#tlacitko-header img {
-  width: 20px;
-  height: 20px;
-}
-
-/* Paticka */
-
-footer {
-  background: linear-gradient(135deg, #0b096e, #040333);
-  padding: 30px 15px;
-  text-align: center;
-}
-
-footer h2.footer-title {
-  font-size: 2.2em;
+/* ============ SEKCE ============ */
+.section{ padding: 24px 20px 10px; }
+.section h2{
+  margin:20px;
+  text-align:left;
+  font-size: clamp(2.4rem, 6vw, 5rem);
   margin-bottom: 10px;
-  text-shadow: none;
+}
+.section p{
+  margin:10px;
+  padding:10px 0;
+  font-size: clamp(1rem, 1.2vw + .5rem, 1.5rem);
 }
 
-footer p {
-  font-size: 1.3em;
-  margin: 0;
+/* ============ KARTY / GALERIE ============ */
+.card{
+  background:linear-gradient(to right,#4b074bc2,#0a034ea2);
+  border-radius:15px;
+  transition:transform .3s ease, box-shadow .2s ease, opacity .2s ease;
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+  box-shadow:0 0 20px #0f0000ab;
+  max-width:none;
+  width:100%;
+  margin:0;
+}
+.card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(56,91,245,.404) 0%, rgba(255,255,255,.045) 35%, rgba(255,53,97,.123) 60%);
+  mix-blend-mode:screen; pointer-events:none; transition:opacity .3s ease;
+}
+.card p{
+  margin:0 10px 6px;
+  padding:8px;
+  font-size: clamp(1rem, 1.1vw + .6rem, 1.5rem);
+  position:relative;
+  padding-right:1.2em;
+}
+.card p::after{
+  content:"»";
+  position:absolute; right:10px; top:40%;
+  transform:translateY(-50%); font-size:2em;
 }
 
-.social-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin: 20px auto;
-  width: 95%;
-  max-width: 900px;
-  overflow: hidden;
+/* SKRYJE DUPLIKÁTY (ponecháno pro tvoje skupiny) */
+.card.hidden { display: none; }
+
+/* Desktop hover only na kartách */
+@media (hover:hover) and (pointer:fine){
+  .card:hover{ transform:scale(1.05); z-index:2; box-shadow:0 0 20px rgba(9,206,255,.842); }
+  .card:hover::before{ opacity:0; }
 }
 
-.social-box {
-  flex: 1 1 70px;
-  max-width: 80px;
-  min-width: 50px;
-  aspect-ratio: 1;
-  perspective: 600px;
-  text-decoration: none;
+/* Mobil/tablet – bez zoomu */
+@media (hover:none){
+  .card:hover{ transform:none; }
+  .card:active{ box-shadow:0 0 16px rgba(0,224,255,.55); }
 }
 
-.social-box .box-inner {
-  position: relative;
+/* ===== GALERIE (mřížka) – stejné šířky díky stretch + width:100% ===== */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:40px;
+  margin:20px;
+  justify-items: stretch;
+  align-items: start;
+  padding:0 20px;
+}
+.gallery .card{ width:100%; max-width:none; }
+
+/* obrázek uvnitř karty */
+.gallery img{
   width: 100%;
   height: 100%;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
+  object-fit: cover;
+  object-position: center;
+  display:block;
+  border-top-left-radius:10px;
+  border-top-right-radius:10px;
 }
 
-.social-box:hover .box-inner {
-  transform: rotateY(180deg);
+/* Desktop: 3 sloupce + pevná výška dlaždic */
+@media (min-width: 1024px){
+  .gallery{
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .gallery img{
+    height: 480px;
+  }
 }
 
-.social-box .front,
-.social-box .back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
+/* Mobil – 1 sloupec, čtverce ~300×300 */
+@media (max-width: 768px){
+  .gallery{ grid-template-columns:1fr; }
+  .gallery img{ width:100%; height:300px; object-fit:cover; }
 }
 
-.social-box .front {
-  background: linear-gradient(135deg, #1e1d5e, #090799);
+/* ============ FULLSCREEN OVERLAY + PRAVÝ SLOUPEK NÁHLEDŮ ============ */
+.fullscreen-overlay{
+  position:fixed; inset:0; background-color:rgba(0,0,0,.9);
+  display:flex; flex-direction:row; align-items:center; justify-content:center;
+  padding:20px; box-sizing:border-box; z-index:9999;
+  opacity:0; animation:fadeOverlay .3s ease-out forwards;
+}
+@keyframes fadeOverlay{ to{opacity:1;} }
+
+#overlay-main-img{
+  max-width:70vw; max-height:90vh; object-fit:contain; border-radius:12px;
+}
+#overlay-thumbs{
+  display:flex; flex-direction:column; gap:10px; margin-left:15px;
+}
+#overlay-thumbs img{
+  width:80px; height:80px; object-fit:cover;
+  border:2px solid rgba(255,255,255,.2); border-radius:8px; cursor:pointer;
+  transition: transform .2s ease, border-color .2s ease; transform-origin:center center;
+}
+@media (hover:hover) and (pointer:fine){
+  #overlay-thumbs img:hover{ transform:scale(1.1); border-color:rgba(255,255,255,.8); }
+}
+@media (hover:none){
+  #overlay-thumbs img:active{ border-color:rgba(255,255,255,.8); }
+}
+#overlay-close{
+  position:absolute; top:20px; right:30px; font-size:2rem; color:#fff; cursor:pointer; z-index:10001;
+}
+@media (max-width: 768px){
+  .fullscreen-overlay{ flex-direction:column; padding:20px; }
+  #overlay-main-img{ max-width:100vw; max-height:50vh; }
+  #overlay-thumbs{ flex-direction:row; margin-left:0; margin-top:15px; flex-wrap:wrap; gap:8px; }
+  #overlay-thumbs img{ width:60px; height:60px; }
 }
 
-.social-box .front img {
-  max-width: 60%;
-  max-height: 60%;
+/* ============ TLAČÍTKO V HEADERU ============ */
+#tlacitko-header{
+  display:flex; align-items:center; gap:8px;
+  font-size:clamp(1rem, 1.1vw + .4rem, 1.1rem);
+  padding:10px; margin-right:40px; font-weight:bold; color:#fff;
+  background:linear-gradient(to right,#4447fdd5,#318affa2,#3634dbb9);
+  border:none; border-radius:8px; text-align:center;
+  transition:all .3s ease; box-shadow:0 4px 10px rgba(3,5,39,.3);
 }
-
-.social-box .back {
-  color: #ffffff;
-  transform: rotateY(180deg);
-  font-size: 0.7rem;
+@media (hover:hover) and (pointer:fine){
+  #tlacitko-header:hover{ transform:scale(1.05); box-shadow:0 0 15px rgba(108,111,255,.699); }
 }
+#tlacitko-header img{ width:20px; height:20px; }
 
-@media (max-width: 600px) {
-  footer {
-    padding: 15px 10px;
-  }
-
-  footer h2.footer-title {
-    font-size: 1.5em;
-  }
-
-  footer p {
-    font-size: 1em;
-  }
-
-  .social-links {
-    gap: 8px;
-    max-width: 100%;
-  }
-
-  .social-box {
-    width: 20vw;
-    min-width: 40px;
-    max-width: 60px;
-  }
-
-  .social-box .front img {
-    max-width: 50%;
-    max-height: 50%;
-  }
-
-  .social-box .back {
-    font-size: 0.5rem;
-  }
+/* ============ PATIČKA ============ */
+footer{
+  background:linear-gradient(135deg,#0b096e,#040333);
+  padding:30px 15px; text-align:center;
+}
+footer h2.footer-title{
+  font-size:clamp(1.6rem, 2.4vw, 2.2rem);
+  margin-bottom:10px; text-shadow:none;
+}
+footer p{
+  font-size:clamp(1rem, 1.2vw + .4rem, 1.3rem);
+  margin:0;
+}
+.social-links{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:15px;
+  margin:20px auto; width:95%; max-width:900px; overflow:hidden;
+}
+.social-box{
+  flex:1 1 70px; max-width:80px; min-width:50px; aspect-ratio:1; perspective:600px; text-decoration:none;
+}
+.social-box .box-inner{ position:relative; width:100%; height:100%; transition:transform .6s; transform-style:preserve-3d; }
+@media (hover:hover) and (pointer:fine){
+  .social-box:hover .box-inner{ transform:rotateY(180deg); }
+}
+.social-box .front, .social-box .back{
+  position:absolute; inset:0; backface-visibility:hidden;
+  display:flex; align-items:center; justify-content:center; border-radius:10px;
+}
+.social-box .front{ background:linear-gradient(135deg,#1e1d5e,#090799); }
+.social-box .front img{ max-width:60%; max-height:60%; }
+.social-box .back{ color:#fff; transform:rotateY(180deg); font-size:.7rem; }
+@media (max-width: 600px){
+  footer{ padding:15px 10px; }
+  footer h2.footer-title{ font-size:clamp(1.4rem,5vw,1.8rem); }
+  footer p{ font-size:1rem; }
+  .social-links{ gap:8px; max-width:100%; }
+  .social-box{ width:20vw; min-width:40px; max-width:60px; }
+  .social-box .front img{ max-width:50%; max-height:50%; }
+  .social-box .back{ font-size:.5rem; }
 }
