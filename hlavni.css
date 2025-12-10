@@ -37,7 +37,7 @@ body {
 }
 
 .container {
-  width: min(60vw, 1800px);
+  width: min(100vw, 1800px);
   margin: 0 auto;
   background-color: #23282c;
   background-size: cover;
@@ -45,7 +45,7 @@ body {
   box-shadow: 0 0 155px rgba(40, 48, 168, 0.74);
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 768px) {
   .container {
     width: 100vw;         /* na mobilu opravdu přes celou šířku */
     box-shadow: none;     /* volitelné: bez obřího stínu na okrajích */
@@ -788,6 +788,7 @@ footer p {
     display: none;
   }
 }
+
 
 
 
