@@ -1,6 +1,8 @@
 html {
   scroll-behavior: smooth;
   background-color: #050816;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 * {
@@ -41,6 +43,13 @@ body {
   background-size: cover;
   background-position: center;
   box-shadow: 0 0 155px rgba(40, 48, 168, 0.74);
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100vw;         /* na mobilu opravdu přes celou šířku */
+    box-shadow: none;     /* volitelné: bez obřího stínu na okrajích */
+  }
 }
 
 /* Hlavička */
@@ -156,6 +165,15 @@ nav a:hover::before {
 
 .section {
   padding: 40px 20px;
+}
+
+
+@media (max-width: 768px) {
+  nav {
+    margin-top: 16px;         /* místo 15vw použij pevnější hodnotu */
+    padding: 10px 10px 20px;  /* míň prostoru dole */
+    gap: 8px;
+  }
 }
 
 /* Barevná pozadí sekcí */
@@ -770,6 +788,7 @@ footer p {
     display: none;
   }
 }
+
 
 
 
