@@ -45,7 +45,7 @@ body {
   box-shadow: 0 0 155px rgba(40, 48, 168, 0.74);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1600px) {
   .container {
     width: 100vw;         /* na mobilu opravdu přes celou šířku */
     box-shadow: none;     /* volitelné: bez obřího stínu na okrajích */
@@ -788,6 +788,7 @@ footer p {
     display: none;
   }
 }
+
 
 
 
