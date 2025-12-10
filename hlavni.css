@@ -37,7 +37,7 @@ body {
 }
 
 .container {
-  width: min(100vw, 1800px);
+  width: min(100vw, 1550px);
   margin: 0 auto;
   background-color: #23282c;
   background-size: cover;
@@ -788,6 +788,7 @@ footer p {
     display: none;
   }
 }
+
 
 
 
